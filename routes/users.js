@@ -37,32 +37,34 @@ router.post('/reg', function (req, res) {
 	});
 
 	// 将用户信息保存的数据库
-	User.get(NewUser.name, function (err, user ) {
+	User.get(NewUser.name, function (err, user) {
 
 		if (err) {
 			req.flash('error', err);
 			res.redirect('/users/reg');
 		}
 
+		// console.log(user);
+
 		// 判断用户名是否重复
 		if (user != null) {
 			req.flash('error', '用户已存在');
 			res.redirect('/users/reg');
+		} else {
+			/**
+			 * 保存数据
+			 * 将注册的用户名存储在session
+			 */
+			NewUser.save(function (err, user) {
+				if (err) {
+					res.flash('error:' + err);
+					res.redirect('/users/reg');
+				}
+				req.session.user = user;
+				req.flash('success', '注册成功');
+				res.redirect('/');
+			});
 		}
-
-		/**
-		 * 保存数据
-		 * 将注册的用户名存储在session
-		 */
-		NewUser.save(function (err, user) {
-			if (err) {
-				res.flash('error:' + err);
-				res.redirect('/users/reg');
-			}
-			req.session.user = user;
-			req.flash('success', '注册成功');
-			res.redirect('/');
-		});
 	});
 });
 
