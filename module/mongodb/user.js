@@ -40,7 +40,7 @@ User.prototype.save = function (callback) {
                 if (err) {
                     return callback(err);
                 }
-                callback(null, user[0]); // 成功，将err 为 Null， 并且返回user信息
+                callback(null, user.ops[0]); // 成功，将err 为 Null， 并且返回user信息
             })
         })
 
@@ -51,6 +51,7 @@ User.prototype.save = function (callback) {
 User.get = function (name, callback) {
     // 打开数据库
     mongodb.open(function (err, db) {
+
         if (err) {
             return callback(err);
         }
@@ -65,7 +66,7 @@ User.get = function (name, callback) {
             collection.findOne({
                 name
             },function(err, user){
-                console.log('name', name);
+
                 mongodb.close();
                 if(err){
                     return callback(err);

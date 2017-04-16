@@ -6,7 +6,7 @@ const md5 = require('md5');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('login', { title: 'Express' });
+    res.render('admin/login', { title: 'Express' });
 });
 
 router.post('/to', function(req, res, next) {

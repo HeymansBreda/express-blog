@@ -1,0 +1,9 @@
+<ul class="nav navbar-nav navbar-right">
+	<% if(user) { %>
+	<li><a href="/login">发表</a></li>
+	<li><a href="/login/out">登出</a></li>
+	<% } else{ %>
+	<li><a href="/login">登录</a></li>
+	<li><a href="/users/reg">注册</a></li>
+	<% } %>
+</ul>
