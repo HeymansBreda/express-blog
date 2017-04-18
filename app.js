@@ -14,6 +14,7 @@ var MongoStore = require('connect-mongo')(session);
 var index = require('./routes/index');
 var login = require('./routes/login');
 var users = require('./routes/users');
+var admin = require('./routes/admin');
 
 var app = express();
 
@@ -22,7 +23,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // 快闪数据
-app.use(flash())
+app.use(flash());
 
 // 将session存储到mongodb数据库中
 app.use(session({
@@ -49,6 +50,7 @@ app.use('/status', express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/login', login);
 app.use('/users', users);
+app.use('/admin', admin);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

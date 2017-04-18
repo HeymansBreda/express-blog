@@ -4,7 +4,8 @@
 var app = new Vue({
 	el: '#app',
 	data: {
-		article: {}
+		article: {},
+		con: ''
 	},
 	mounted: function () {
 		this.$nextTick(function () {
@@ -12,9 +13,12 @@ var app = new Vue({
 		})
 	},
 	methods: {
-		articles: function(){
-			axios.get('/article').then(function(data){
-				this.article = data.data;
+		articles: function () {
+			axios.get('/article').then((data) => {
+				data = data.data;
+				if (data.result === "ok" && data.code === "0") {
+					this.article = data.data;
+				}
 			})
 		}
 	}

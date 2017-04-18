@@ -4,7 +4,7 @@ var fs = require("fs");
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-	console.log(req.session);
+	// console.log(req.session);
 	res.render('home/index', {
 		title: 'Express',
 		user: req.session.user,
@@ -14,8 +14,9 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/article', function (req, res, next) {
-	var data = fs.readFileSync('./module/mock/article.json', 'utf-8');
-	res.json(data.toString());
+	// var data = fs.readFileSync('./module/mock/article.json');
+	var data = JSON.parse(fs.readFileSync('./module/mock/article.json'));
+	res.json(data);
 });
 
 module.exports = router;
