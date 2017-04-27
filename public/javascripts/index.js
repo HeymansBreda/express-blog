@@ -7,6 +7,11 @@ var app = new Vue({
 		article: {},
 		con: ''
 	},
+	computed: {
+		compiledMarkdown: function () {
+			return marked(this.con, { sanitize: true });
+		}
+	},
 	mounted: function () {
 		this.$nextTick(function () {
 			this.articles();
@@ -20,7 +25,11 @@ var app = new Vue({
 					this.article = data.data;
 				}
 			})
-		}
+		},
+		update: _.debounce(function (e) {
+			alert(1);
+			this.con = e.target.value;
+		}, 300)
 	}
 
 });
